@@ -16,3 +16,16 @@ func CreateUser(user users.User) (*users.User, *errors.RestErr) {
 
 	return &user, nil
 }
+
+//GetUser get user Info
+func GetUser(userId int64) (*users.User, *errors.RestErr) {
+
+	if userId <= 0 {
+		return nil, errors.NewBadRequestError("Invalid User Id")
+	}
+	result := &users.User{Id: userId}
+	if err := result.Get(); err != nil {
+		return nil, err
+	}
+	return result, nil
+}
