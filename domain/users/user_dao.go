@@ -3,6 +3,7 @@ package users
 import (
 	"fmt"
 
+	"github.com/jerana/bookstore_users_api/utils/dateutils"
 	"github.com/jerana/bookstore_users_api/utils/errors"
 )
 
@@ -33,7 +34,7 @@ func (u *User) Save() *errors.RestErr {
 		}
 		return errors.NewBadRequestError(fmt.Sprint("User %d already exit", u.Id))
 	}
-
+	u.DateCreated = dateutils.GetNowString()
 	userDB[u.Id] = u
 	return nil
 }
